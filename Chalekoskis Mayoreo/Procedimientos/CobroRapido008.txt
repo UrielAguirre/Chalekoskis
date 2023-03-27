@@ -1,0 +1,11 @@
+'SIE Desarrollos: Marca venta para envío a Menudeo 
+	Dim rstVta, clienteSucMenudeo
+	clienteSucMenudeo = "CMENUDEOP"
+	Set rstVta = rst("Select cliente From ventas Where venta = " & Me.Venta, Ambiente.Connection)
+	If Not rstVta.Eof Then 
+		If rstVta("cliente") = clienteSucMenudeo Then 
+			SetSessionValue Ambiente, "@nVenta", Me.Venta   			
+			Script.RunProcess "SIEENVIEAMENUDEO", Parent, Ambiente  
+		End If 
+	End If   	
+	''''''''''''
